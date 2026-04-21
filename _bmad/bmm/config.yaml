@@ -1,0 +1,19 @@
+# BMAD Method Configuration
+
+project:
+  name: recruitment-assistant
+  root: D:/project/recruitment-assistant
+
+paths:
+  planning_artifacts: _bmad/artifacts
+  implementation_artifacts: _bmad/artifacts
+
+user:
+  name: admin
+  skill_level: intermediate
+
+communication:
+  language: zh-CN
+  document_language: zh-CN
+
+date: 2026-04-18

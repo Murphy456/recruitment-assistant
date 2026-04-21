@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(npm test *)",
+      "Bash(node *)",
+      "Bash(npx vitest *)",
+      "Bash(mkdir -p release)",
+      "Bash(powershell -Command \"Compress-Archive -Path 'dist\\\\*' -DestinationPath 'release/recruitment-assistant-extension.zip' -Force\")",
+      "Bash(powershell -Command ' *)"
+    ]
+  }
+}
