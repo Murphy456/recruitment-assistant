@@ -13,6 +13,10 @@ async function loadSettings(): Promise<void> {
   (document.getElementById('aiProvider') as HTMLSelectElement).value = settings.ai.provider;
   (document.getElementById('aiModel') as HTMLInputElement).value = settings.ai.model;
   (document.getElementById('apiKey') as HTMLInputElement).value = settings.ai.apiKey;
+  (document.getElementById('customBaseUrl') as HTMLInputElement).value = settings.ai.customBaseUrl || '';
+
+  // 根据提供商显示/隐藏自定义 URL 输入框
+  updateCustomUrlVisibility(settings.ai.provider);
 
   // 匹配配置
   (document.getElementById('defaultThreshold') as HTMLInputElement).value = String(
@@ -39,6 +43,14 @@ async function loadSettings(): Promise<void> {
   (document.getElementById('showReason') as HTMLInputElement).checked = settings.display.showReason;
 }
 
+// 更新自定义 URL 输入框的显示状态
+function updateCustomUrlVisibility(provider: string): void {
+  const customUrlGroup = document.getElementById('customUrlGroup');
+  if (customUrlGroup) {
+    customUrlGroup.style.display = provider === 'custom' ? 'block' : 'none';
+  }
+}
+
 // 保存设置
 async function saveSettings(): Promise<void> {
   const settings: Settings = {
@@ -46,6 +58,7 @@ async function saveSettings(): Promise<void> {
       provider: (document.getElementById('aiProvider') as HTMLSelectElement).value as Settings['ai']['provider'],
       model: (document.getElementById('aiModel') as HTMLInputElement).value,
       apiKey: (document.getElementById('apiKey') as HTMLInputElement).value,
+      customBaseUrl: (document.getElementById('customBaseUrl') as HTMLInputElement).value,
     },
     match: {
       defaultThreshold: parseInt(
@@ -90,6 +103,11 @@ async function saveSettings(): Promise<void> {
 
 // 绑定事件
 document.getElementById('saveBtn')?.addEventListener('click', saveSettings);
+
+// 监听提供商变化
+document.getElementById('aiProvider')?.addEventListener('change', (e) => {
+  updateCustomUrlVisibility((e.target as HTMLSelectElement).value);
+});
 
 // 初始化
 loadSettings();

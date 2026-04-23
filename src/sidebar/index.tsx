@@ -9,6 +9,7 @@ import { useCandidateStore } from '../stores/candidates';
 import { useSettingsStore } from '../stores/settings';
 import Header from './Header';
 import JDSelector from './JDSelector';
+import JDManager from './JDManager';
 import CandidateList from './CandidateList';
 import CandidateDetail from './CandidateDetail';
 import SettingsPanel from './SettingsPanel';
@@ -17,7 +18,7 @@ interface SidebarProps {
   adapter: PlatformAdapter;
 }
 
-type ViewMode = 'list' | 'detail' | 'settings';
+type ViewMode = 'list' | 'detail' | 'settings' | 'jdManager';
 
 const Sidebar: React.FC<SidebarProps> = ({ adapter }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
@@ -75,12 +76,15 @@ const Sidebar: React.FC<SidebarProps> = ({ adapter }) => {
 
       {viewMode === 'settings' ? (
         <SettingsPanel />
+      ) : viewMode === 'jdManager' ? (
+        <JDManager onBack={() => setViewMode('list')} />
       ) : (
         <>
           <JDSelector
             jds={jds}
             activeJD={activeJD}
             onSelect={(jd) => useJDStore.getState().setActiveJD(jd)}
+            onManage={() => setViewMode('jdManager')}
           />
 
           {viewMode === 'list' && (

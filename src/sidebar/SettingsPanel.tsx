@@ -8,6 +8,8 @@ import { useSettingsStore } from '../stores/settings';
 const SettingsPanel: React.FC = () => {
   const { settings, updateAIConfig, updateSendConfig, updateDisplayConfig } = useSettingsStore();
 
+  const isCustomProvider = settings.ai.provider === 'custom';
+
   return (
     <div className="settings-panel">
       <h3>设置</h3>
@@ -28,6 +30,18 @@ const SettingsPanel: React.FC = () => {
             <option value="custom">自定义</option>
           </select>
         </div>
+
+        {isCustomProvider && (
+          <div className="form-group">
+            <label>API 地址</label>
+            <input
+              type="text"
+              value={settings.ai.customBaseUrl || ''}
+              onChange={(e) => updateAIConfig({ customBaseUrl: e.target.value })}
+              placeholder="https://api.example.com/v1"
+            />
+          </div>
+        )}
 
         <div className="form-group">
           <label>模型</label>

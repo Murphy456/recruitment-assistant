@@ -41,6 +41,8 @@ export class OpenAICompatibleProvider implements AIProvider {
         return 'https://open.bigmodel.cn/api/paas/v4';
       case 'moonshot':
         return 'https://api.moonshot.cn/v1';
+      case 'custom':
+        return this.config.customBaseUrl || 'https://api.openai.com/v1';
       default:
         return this.config.proxy?.enabled
           ? this.config.proxy.address

@@ -103,6 +103,9 @@
       opacity: 1;
     }
   </style>
+  <script type="module" crossorigin src="/assets/index.html-Pe_XPsbh.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/assets/settings-CAV-tMK1.js">
 </head>
 <body>
   <h1>招聘助手设置</h1>
@@ -129,6 +132,10 @@
     <div class="form-group">
       <label>API Key</label>
       <input type="password" id="apiKey" placeholder="请输入 API Key">
+    </div>
+    <div class="form-group" id="customUrlGroup" style="display: none;">
+      <label>自定义 API 地址</label>
+      <input type="text" id="customBaseUrl" placeholder="https://api.example.com/v1">
     </div>
   </div>
 
@@ -200,6 +207,5 @@
 
   <div class="toast" id="toast">设置已保存</div>
 
-  <script src="options.js"></script>
 </body>
 </html>

@@ -37,7 +37,24 @@ export class ZhilianAdapter implements PlatformAdapter {
   private config = ZHILIAN_CONFIG;
 
   isTargetPage(url: string): boolean {
-    return url.includes('zhaopin.com');
+    // 支持的页面路径
+    const supportedPaths = [
+      '/app/search',      // 搜索列表页
+      '/app/potential',   // 潜在人才页
+    ];
+
+    try {
+      const urlObj = new URL(url);
+      // 检查是否是智联招聘域名
+      if (!urlObj.hostname.endsWith('zhaopin.com')) {
+        return false;
+      }
+      // 检查是否是支持的页面路径
+      // 搜索列表页和简历详情页（简历详情页路径也是 /app/search 但带有 resumeNumber 参数）
+      return supportedPaths.some(path => urlObj.pathname.startsWith(path));
+    } catch {
+      return false;
+    }
   }
 
   extractListItems(): Array<{

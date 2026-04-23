@@ -14,6 +14,7 @@ export interface AIConfig {
   provider: 'openai' | 'qwen' | 'zhipu' | 'moonshot' | 'custom';
   model: string;
   apiKey: string;
+  customBaseUrl?: string;
   proxy?: {
     enabled: boolean;
     address: string;
@@ -56,6 +57,7 @@ export const DEFAULT_SETTINGS: Settings = {
     provider: 'qwen',
     model: 'qwen-plus',
     apiKey: '',
+    customBaseUrl: '',
   },
   match: {
     defaultThreshold: 70,
