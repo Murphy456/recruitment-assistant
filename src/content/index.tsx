@@ -65,9 +65,12 @@ function observePageChanges(adapter: typeof adapters[0]) {
   });
 }
 
-// 等待DOM加载完成
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
+// CRXJS vite-plugin requires this export
+export function onExecute() {
+  // 等待DOM加载完成
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 }

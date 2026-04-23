@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { crx } from '@crxjs/vite-plugin';
 import { resolve } from 'path';
+import manifest from './public/manifest.json';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    crx({ manifest }),
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -12,19 +17,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: process.env.NODE_ENV === 'development',
-    rollupOptions: {
-      input: {
-        background: resolve(__dirname, 'src/background/index.ts'),
-        content: resolve(__dirname, 'src/content/index.tsx'),
-        popup: resolve(__dirname, 'src/popup/index.html'),
-        options: resolve(__dirname, 'src/options/index.html'),
-      },
-      output: {
-        entryFileNames: 'src/[name]/index.js',
-        chunkFileNames: 'chunks/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash][extname]',
-      },
-    },
   },
-  copyPublicDir: true,
 });

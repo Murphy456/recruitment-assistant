@@ -8,7 +8,12 @@
       "Bash(npx vitest *)",
       "Bash(mkdir -p release)",
       "Bash(powershell -Command \"Compress-Archive -Path 'dist\\\\*' -DestinationPath 'release/recruitment-assistant-extension.zip' -Force\")",
-      "Bash(powershell -Command ' *)"
+      "Bash(powershell -Command ' *)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs",
+      "WebSearch",
+      "WebFetch(domain:crxjs.dev)",
+      "Bash(npm list *)"
     ]
   }
 }
